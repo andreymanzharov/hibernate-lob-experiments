@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+repositories {
+  jcenter()
+}
+
+dependencies {
+  compile 'org.hibernate:hibernate-core:4.3.7.Final'
+  compile 'org.hibernate:hibernate-entitymanager:4.3.7.Final'
+
+  runtime 'org.postgresql:postgresql:42.2.0'
+
+  testCompile 'org.junit.jupiter:junit-jupiter-api:5.0.2'
+  testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.0.2'
+}
