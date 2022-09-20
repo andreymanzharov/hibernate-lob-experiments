@@ -13,7 +13,7 @@ class LobTest {
 
   @BeforeAll
   static void setUp() {
-    sessionFactory = Persistence.createEntityManagerFactory("ru.andrey.experiments.jpa");
+    sessionFactory = Persistence.createEntityManagerFactory("experiments");
   }
 
   @Test
