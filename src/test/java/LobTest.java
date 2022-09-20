@@ -1,30 +1,30 @@
 import entities.Error;
-import org.junit.jupiter.api.BeforeAll;
+import extensions.EntityManagerResolver;
+import extensions.EntityManagerResolver.Unit;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import java.time.LocalDateTime;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@ExtendWith(EntityManagerResolver.class)
 class LobTest {
 
-  private static EntityManagerFactory sessionFactory;
-
-  @BeforeAll
-  static void setUp() {
-    sessionFactory = Persistence.createEntityManagerFactory("experiments");
-  }
-
   @Test
-  void insert() {
-    EntityManager em = sessionFactory.createEntityManager();
+  void insert(EntityManager em) {
     em.getTransaction().begin();
 
-    Error error = new Error(LocalDateTime.now() + ": error");
+    Error error = new Error("error");
     em.persist(error);
 
     em.getTransaction().commit();
   }
 
+  @Test
+  void select(@Unit EntityManager em) {
+    var errors = em.createQuery("select e from Error e", Error.class).getResultList();
+    assertEquals(1, errors.size());
+    assertEquals("error", errors.get(0).getMessage());
+  }
 }
