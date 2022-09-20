@@ -1,15 +1,29 @@
 apply plugin: 'java'
 
 repositories {
-  jcenter()
+  mavenCentral()
+}
+
+java {
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
 }
 
 dependencies {
-  compile 'org.hibernate:hibernate-core:4.3.7.Final'
-  compile 'org.hibernate:hibernate-entitymanager:4.3.7.Final'
+  implementation 'org.hibernate:hibernate-core:5.3.20.Final'
+  implementation 'org.hibernate:hibernate-entitymanager:5.3.20.Final'
 
-  runtime 'org.postgresql:postgresql:42.2.5'
+  runtimeOnly 'org.postgresql:postgresql:42.5.0'
 
-  testCompile 'org.junit.jupiter:junit-jupiter-api:5.3.1'
-  testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+test {
+  useJUnitPlatform()
+}
+
+tasks.named('wrapper') {
+  distributionType = Wrapper.DistributionType.ALL
 }
