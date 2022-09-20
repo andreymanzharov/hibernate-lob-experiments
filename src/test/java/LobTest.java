@@ -1,6 +1,7 @@
 import entities.Error;
 import extensions.EntityManagerResolver;
 import extensions.EntityManagerResolver.Unit;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -8,6 +9,7 @@ import javax.persistence.EntityManager;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Order(1)
 @ExtendWith(EntityManagerResolver.class)
 class LobTest {
 
